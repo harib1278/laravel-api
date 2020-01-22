@@ -99,8 +99,12 @@ class ItemsController extends Controller
     {
         $item = Item::find($id);
 
-        $item->destroy();
+        if ($item) {
+          $item->delete();
 
-        return response()->json($item);
+          return ['response' => 'Item deleted', 'success' => true];
+        }
+
+        return ['response' => 'Item Not found', 'success' => false];
     }
 }
